@@ -7,7 +7,6 @@ export function printTestForm(form: DbTestForm) {
   const w = window.open("", "_blank", "width=900,height=1100");
   if (!w) return;
   const dateStr = new Date(form.date_collected).toLocaleString();
-  const tests = form.tests_requested.map((t) => `<li>${escapeHtml(t)}</li>`).join("");
   const results = (form.results ?? {}) as Record<string, string>;
   const resultsHtml = LAB_SECTIONS.map((section) => {
     if (section.layout === "antigen-table" && section.antigenRows) {
@@ -124,10 +123,6 @@ export function printTestForm(form: DbTestForm) {
     <div><div class="label">Institution</div><div class="val">${escapeHtml(form.institution ?? "—")}</div></div>
     <div class="full"><div class="label">Specimen</div><div class="val">${escapeHtml(form.nature_of_specimen ?? "—")}</div></div>
     <div class="full"><div class="label">Examination Required</div><div class="val">${escapeHtml(form.examination_required ?? "—")}</div></div>
-  </div>
-  <div class="section">
-    <h3>Tests Requested</h3>
-    <ul>${tests || "<li>—</li>"}</ul>
   </div>
   ${resultsHtml}
   ${form.clinical_notes ? `<div class="section"><h3>Clinical Notes</h3><div class="notes">${escapeHtml(form.clinical_notes)}</div></div>` : ""}
