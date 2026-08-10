@@ -50,12 +50,6 @@ const TEMPLATES: Record<string, ScanTemplate> = {
     impression: "Normal transvaginal pelvic ultrasound scan.",
     recommendation: "Clinical correlation. Repeat scan as clinically indicated.",
   },
-  "__Ultrasound - Thyroid (dup)": {
-    findings:
-      "Both lobes of the thyroid gland are normal in size, shape and echotexture.\n  Right lobe: ___ x ___ x ___ cm\n  Left lobe:  ___ x ___ x ___ cm\n  Isthmus:    ___ mm\nNo focal nodule, cyst or calcification. Normal vascularity on colour Doppler.\nNo cervical lymphadenopathy.",
-    impression: "Normal thyroid ultrasound scan.",
-    recommendation: "Clinical and biochemical correlation.",
-  },
   "Ultrasound - Doppler": {
     findings:
       "The examined vessels show normal calibre, wall thickness and compressibility.\nColour flow is well demonstrated throughout with normal spectral waveforms.\nNo intraluminal thrombus or significant stenosis identified.\nPeak systolic velocities are within normal limits.",
