@@ -112,7 +112,7 @@ export const SCAN_TYPES_BY_MODALITY: Record<string, string[]> = {
   CT: ["Head", "Chest", "Abdomen", "Pelvis", "Spine", "Neck", "Angiography"],
   MRI: ["Brain", "Spine", "Knee", "Shoulder", "Abdomen", "Pelvis"],
   "X-Ray": ["Chest", "Abdomen", "Extremity", "Spine", "Skull"],
-  Ultrasound: ["Abdomen", "Pelvis", "Obstetric", "Thyroid", "Doppler"],
+  Ultrasound: ["Abdomen", "Pelvis", "Obstetric", "Thyroid", "Prostate", "Breast", "Transvaginal", "Doppler"],
   Mammography: ["Screening", "Diagnostic"],
   PET: ["Whole Body", "Brain", "Cardiac"],
   Fluoroscopy: ["Barium Swallow", "Barium Meal", "IVU"],
