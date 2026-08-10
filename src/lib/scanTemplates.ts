@@ -32,6 +32,24 @@ const TEMPLATES: Record<string, ScanTemplate> = {
     impression: "Normal thyroid ultrasound scan.",
     recommendation: "Clinical and biochemical correlation.",
   },
+  "Ultrasound - Prostate": {
+    findings:
+      "URINARY BLADDER: Adequately distended, smooth wall of normal thickness. No calculus, mass or diverticulum.\nPROSTATE: Normal in size, shape and echotexture with a smooth, well-defined capsule.\n  Dimensions: ___ x ___ x ___ cm\n  Estimated volume: ___ cc (normal < 30 cc)\nNo focal hypoechoic lesion, cyst or calcification within the gland.\nThere is no median lobe indentation into the bladder base.\nSeminal vesicles are symmetrical and normal in appearance.\nPre-void bladder volume: ___ ml.  Post-void residual urine: ___ ml (normal < 20 ml).\nNo peri-prostatic fluid collection or pelvic lymphadenopathy.",
+    impression: "Normal prostate ultrasound scan with insignificant post-void residual urine.",
+    recommendation: "Clinical correlation with PSA and digital rectal examination as indicated.",
+  },
+  "Ultrasound - Breast": {
+    findings:
+      "Bilateral breasts show normal fibroglandular tissue with preserved architecture.\nSkin thickness is normal. No skin retraction or nipple inversion.\nNo dominant solid or cystic mass identified in either breast.\nNo duct ectasia; the retro-areolar regions are unremarkable.\nNo architectural distortion or suspicious microcalcification.\nRIGHT BREAST: No focal lesion in any quadrant.\nLEFT BREAST: No focal lesion in any quadrant.\nBoth axillae show no pathologically enlarged lymph nodes; visualised nodes retain normal fatty hila.",
+    impression: "Normal bilateral breast ultrasound scan. BI-RADS 1 (negative).",
+    recommendation: "Routine screening and clinical breast examination as age appropriate.",
+  },
+  "Ultrasound - Transvaginal": {
+    findings:
+      "Study performed transvaginally with the bladder empty.\nUTERUS: Anteverted/retroverted, normal in size, contour and myometrial echotexture, measures ___ x ___ x ___ cm. No fibroid or focal myometrial lesion.\nENDOMETRIUM: Central, homogeneous and regular, thickness ___ mm — appropriate for the stated cycle day. No intracavitary fluid, polyp or mass.\nCERVIX: Normal in appearance. No nabothian cyst or mass. Length ___ cm.\nRIGHT OVARY: Normal in size and echotexture, measures ___ x ___ x ___ cm (___ cc), with normal follicular activity. No adnexal mass.\nLEFT OVARY: Normal in size and echotexture, measures ___ x ___ x ___ cm (___ cc), with normal follicular activity. No adnexal mass.\nNo hydrosalpinx or adnexal tenderness on probe pressure.\nNo free fluid in the pouch of Douglas.",
+    impression: "Normal transvaginal pelvic ultrasound scan.",
+    recommendation: "Clinical correlation. Repeat scan as clinically indicated.",
+  },
   "Ultrasound - Doppler": {
     findings:
       "The examined vessels show normal calibre, wall thickness and compressibility.\nColour flow is well demonstrated throughout with normal spectral waveforms.\nNo intraluminal thrombus or significant stenosis identified.\nPeak systolic velocities are within normal limits.",
