@@ -261,6 +261,19 @@ const Results = () => {
   };
 
   // Build a TestForm-shaped object so we can reuse ReportPreview
+  const resultValues = result?.results ?? {};
+  const dynamicRows: DynamicRow[] = labTests.flatMap((test) => {
+    const fields = templateFor(test);
+    return fields
+      .map((f) => ({
+        key: fieldKey(test, f),
+        label: fields.length > 1 ? `${test.name} — ${f.label}` : test.name,
+        unit: f.unit ?? null,
+        range: f.range ?? null,
+      }))
+      .filter((row) => (resultValues[row.key] ?? "").trim() !== "");
+  });
+
   const reportForm: TestForm | null = result
     ? {
         serial: result.serial,
