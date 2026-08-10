@@ -1,0 +1,1 @@
+UPDATE public.profiles SET role = 'Senior Lab Scientist' WHERE user_id = 'cf599e02-aab0-4626-8d95-95d877511329';

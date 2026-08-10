@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Medvic Goodhealth — design system. All colors HSL. */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 270 40% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 270 40% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 40% 12%;
+
+    /* Brand purple (logo) */
+    --primary: 278 65% 35%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 290 80% 60%;
+    --primary-soft: 280 65% 95%;
+
+    --secondary: 280 45% 97%;
+    --secondary-foreground: 278 55% 26%;
+
+    --muted: 280 25% 97%;
+    --muted-foreground: 270 10% 38%;
+
+    --accent: 320 85% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 78% 56%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 280 25% 90%;
+    --input: 280 25% 90%;
+    --ring: 278 60% 38%;
+
+    --radius: 1rem;
+
+    /* Vibrant brand gradients — purple-forward */
+    --gradient-primary: linear-gradient(135deg, hsl(278 65% 32%), hsl(290 75% 52%));
+    --gradient-soft: linear-gradient(160deg, hsl(280 60% 97%), hsl(290 55% 94%));
+    --gradient-hero: linear-gradient(135deg, hsl(278 70% 28% / 0.95), hsl(295 75% 45% / 0.85));
+    --gradient-accent: linear-gradient(135deg, hsl(320 85% 58%), hsl(280 70% 55%));
+    --gradient-mesh: radial-gradient(at 20% 10%, hsl(290 80% 60% / 0.18) 0px, transparent 50%), radial-gradient(at 80% 90%, hsl(320 80% 60% / 0.15) 0px, transparent 50%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 24px -6px hsl(278 60% 28% / 0.18);
+    --shadow-elegant: 0 20px 60px -20px hsl(278 65% 35% / 0.4);
+    --shadow-glow: 0 0 50px hsl(290 80% 60% / 0.5);
+
+    --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 270 20% 26%;
+    --sidebar-primary: 278 60% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 280 40% 95%;
+    --sidebar-accent-foreground: 278 60% 24%;
+    --sidebar-border: 280 25% 90%;
+    --sidebar-ring: 278 60% 38%;
+  }
+
+  .dark {
+    --background: 270 30% 8%;
+    --foreground: 280 30% 96%;
+    --card: 270 30% 10%;
+    --card-foreground: 280 30% 96%;
+    --popover: 270 30% 10%;
+    --popover-foreground: 280 30% 96%;
+    --primary: 285 70% 65%;
+    --primary-foreground: 270 40% 10%;
+    --primary-glow: 285 75% 70%;
+    --primary-soft: 278 40% 18%;
+    --secondary: 270 25% 16%;
+    --secondary-foreground: 280 30% 96%;
+    --muted: 270 25% 16%;
+    --muted-foreground: 280 15% 70%;
+    --accent: 340 75% 65%;
+    --accent-foreground: 270 30% 10%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 270 25% 20%;
+    --input: 270 25% 20%;
+    --ring: 285 70% 65%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-soft { background-image: var(--gradient-soft); }
+  .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .bg-gradient-accent { background-image: var(--gradient-accent); }
+  .bg-mesh { background-image: var(--gradient-mesh); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .transition-smooth { transition: var(--transition-smooth); }
+  .text-gradient {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Print styles — render the report on clean A4 pages */
+@media print {
+  @page { size: A4 portrait; margin: 10mm; }
+
+  html,
+  body,
+  #root {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  body * { visibility: hidden !important; }
+
+  .print-area,
+  .print-area *,
+  .print-document,
+  .print-document * {
+    visibility: visible !important;
+  }
+
+  .print-area,
+  .print-document {
+    background: #ffffff !important;
+    display: block !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    position: static !important;
+    width: 100% !important;
+  }
+
+  .print-report {
+    background: #ffffff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: #0f172a !important;
+    display: block !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    max-width: 190mm !important;
+    overflow: visible !important;
+    page-break-inside: auto !important;
+    width: 100% !important;
+  }
+
+  .print-report section,
+  .print-report table,
+  .print-report tr,
+  .print-report img {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .no-print { display: none !important; }
+
+  .print-frame-body * { visibility: visible !important; }
+}

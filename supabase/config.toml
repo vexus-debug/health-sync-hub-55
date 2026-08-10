@@ -1,0 +1,4 @@
+project_id = "jajkpocfaupnircuvbjm"
+
+[functions.manage-scientist]
+verify_jwt = true
