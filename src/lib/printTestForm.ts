@@ -1,14 +1,16 @@
 import { DbTestForm } from "./supabaseQueries";
 import { SITE } from "./site";
 import { LAB_SECTIONS } from "./labCatalog";
+import { fetchLabTests } from "./labTests";
+import { templateFor, fieldKey } from "./testTemplates";
 import logo from "@/assets/logo.png";
 
-export function printTestForm(form: DbTestForm) {
+export async function printTestForm(form: DbTestForm) {
   const w = window.open("", "_blank", "width=900,height=1100");
   if (!w) return;
   const dateStr = new Date(form.date_collected).toLocaleString();
   const results = (form.results ?? {}) as Record<string, string>;
-  const resultsHtml = LAB_SECTIONS.map((section) => {
+  const staticHtml = LAB_SECTIONS.map((section) => {
     if (section.layout === "antigen-table" && section.antigenRows) {
       const hasAny = section.antigenRows.some(
         (r) => (results[r.oKey] && String(results[r.oKey]).trim() !== "") ||
@@ -51,6 +53,46 @@ export function printTestForm(form: DbTestForm) {
         <tbody>${rows}</tbody>
       </table></div>`;
   }).join("");
+
+  // Dynamic tests created in Manage Tests (lab_tests table)
+  let dynamicHtml = "";
+  try {
+    const labTests = await fetchLabTests();
+    const dynRows = labTests
+      .flatMap((test) => {
+        const fields = templateFor(test);
+        return fields.map((f) => ({
+          key: fieldKey(test, f),
+          label: fields.length > 1 ? `${test.name} — ${f.label}` : test.name,
+          unit: f.unit ?? null,
+          range: f.range ?? null,
+        }));
+      })
+      .filter((r) => results[r.key] && String(results[r.key]).trim() !== "");
+
+    if (dynRows.length) {
+      const rows = dynRows
+        .map(
+          (r) => `<tr>
+          <td style="padding:4px 8px;border-top:1px solid #f1f5f9;color:#334155;">${escapeHtml(r.label)}</td>
+          <td style="padding:4px 8px;border-top:1px solid #f1f5f9;font-weight:600;color:#0f172a;">${escapeHtml(String(results[r.key]))}${r.unit ? ` <span style=\"font-weight:400;color:#64748b;font-size:10px;\">${escapeHtml(r.unit)}</span>` : ""}</td>
+          <td style="padding:4px 8px;border-top:1px solid #f1f5f9;color:#64748b;font-size:11px;">${escapeHtml(r.range ?? "—")}</td>
+        </tr>`,
+        )
+        .join("");
+      dynamicHtml = `<div class="section"><h3>Test Results</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead><tr style="text-align:left;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.06em;">
+            <th style="padding:4px 8px;width:50%;">Test</th><th style="padding:4px 8px;">Result</th><th style="padding:4px 8px;">Reference</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>`;
+    }
+  } catch {
+    dynamicHtml = "";
+  }
+
+  const resultsHtml = `${staticHtml}${dynamicHtml}`;
   const html = `<!doctype html>
 <html><head><meta charset="utf-8"/>
 <title>Test Form ${escapeHtml(form.serial)} — ${escapeHtml(form.patient_name)}</title>
