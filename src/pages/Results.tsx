@@ -10,6 +10,9 @@ import { SEO } from "@/components/seo/SEO";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ReportPreview } from "@/components/dashboard/ReportPreview";
+import type { DynamicRow } from "@/components/dashboard/ReportPreview";
+import { fetchLabTests, type LabTest } from "@/lib/labTests";
+import { templateFor, fieldKey } from "@/lib/testTemplates";
 import { TestForm } from "@/lib/labCatalog";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -55,7 +58,15 @@ const Results = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PublicResult | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [labTests, setLabTests] = useState<LabTest[]>([]);
   const reportRef = useRef<HTMLDivElement>(null);
+
+  // Dynamically-created tests (lab_tests table) so newly added tests appear on the report
+  useEffect(() => {
+    fetchLabTests()
+      .then(setLabTests)
+      .catch(() => setLabTests([]));
+  }, []);
 
   // Auto-scroll to report when result loads
   useEffect(() => {
