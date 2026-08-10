@@ -125,10 +125,6 @@ export function printTestForm(form: DbTestForm) {
     <div class="full"><div class="label">Specimen</div><div class="val">${escapeHtml(form.nature_of_specimen ?? "—")}</div></div>
     <div class="full"><div class="label">Examination Required</div><div class="val">${escapeHtml(form.examination_required ?? "—")}</div></div>
   </div>
-  <div class="section">
-    <h3>Tests Requested</h3>
-    <ul>${tests || "<li>—</li>"}</ul>
-  </div>
   ${resultsHtml}
   ${form.clinical_notes ? `<div class="section"><h3>Clinical Notes</h3><div class="notes">${escapeHtml(form.clinical_notes)}</div></div>` : ""}
   <div class="signs">
