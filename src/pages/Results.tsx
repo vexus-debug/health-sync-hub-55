@@ -399,7 +399,12 @@ const Results = () => {
               </div>
             </div>
             <div ref={reportRef} className="print-area">
-              <ReportPreview form={reportForm} values={reportForm.results ?? {}} scientistName={result?.scientist_name ?? undefined} />
+              <ReportPreview
+                form={reportForm}
+                values={reportForm.results ?? {}}
+                scientistName={result?.scientist_name ?? undefined}
+                dynamicRows={dynamicRows}
+              />
             </div>
           </div>
         </section>
